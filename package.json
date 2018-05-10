@@ -1,0 +1,38 @@
+{
+    "name": "that-brickpi3-library",
+    "description": "A BrickPi3 Robot",
+    "version": "0.0.2",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ThatDevCompany/that-brickpi3-library.git"
+    },
+    "contributors": [
+        "Stephen James <steve@thatdevcompany.com> (http://thatdevcompany.com)"
+    ],
+    "main": "index.js",
+    "scripts": {
+        "lint": "node scripts/lint.js",
+        "build:scripts": "tsc -p scripts/tsconfig.json",
+        "build:tests": "tsc -p src/tsconfig.json",
+        "build": "node scripts/build.js",
+        "test": "npm run build:tests && node scripts/test.js",
+        "publish": "node scripts/publish.js"
+    },
+    "dependencies": {
+        "lodash": "^4.17.5",
+        "rxjs": "^5.5.10"
+    },
+    "devDependencies": {
+        "that-build-library": "^0.0.4",
+        "@types/jasmine": "~2.8.3",
+        "@types/jasminewd2": "~2.0.2",
+        "@types/node": "~6.0.60",
+        "istanbul": "^0.4.5",
+        "jasmine": "^3.1.0",
+        "jasmine-core": "~2.8.0",
+        "jasmine-spec-reporter": "~4.2.1",
+        "tslint": "^5.10.0",
+        "typescript": "^2.8.3"
+    }
+}
