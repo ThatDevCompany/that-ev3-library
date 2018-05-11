@@ -1,7 +1,7 @@
 {
     "name": "that-brickpi3-library",
-    "description": "A BrickPi3 Robot",
-    "version": "0.0.2",
+    "description": "A library of BrickPi3 projects, utilities and tools to be run within the that-brickpi3-robot project",
+    "version": "0.0.3",
     "license": "MIT",
     "repository": {
         "type": "git",
