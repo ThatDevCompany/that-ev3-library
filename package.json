@@ -1,7 +1,7 @@
 {
     "name": "that-ev3-library",
     "description": "A library of ev3Dev projects, utilities and tools to be on an EV3Dev based robot",
-    "version": "0.0.3",
+    "version": "0.0.6",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -13,7 +13,6 @@
     "scripts": {
         "lint": "node scripts/lint.js",
         "build:scripts": "tsc -p scripts/tsconfig.json",
-        "build:e2e": "tsc -p e2e/tsconfig.json",
         "build:tests": "tsc -p src/tsconfig.json",
         "build": "node scripts/build.js",
         "test": "npm run build:tests && node scripts/test.js",
