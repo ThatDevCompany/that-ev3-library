@@ -8,9 +8,4 @@ describe('E2E', () => {
 		robot.run();
 	});
 
-	it('should be log an error if trying to run without a project', () => {
-		const robot = new EV3.Robot();
-		robot.run();
-	});
-
 });

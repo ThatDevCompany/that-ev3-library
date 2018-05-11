@@ -1,7 +1,7 @@
 {
     "name": "that-ev3-library",
     "description": "A library of ev3Dev projects, utilities and tools to be on an EV3Dev based robot",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -19,7 +19,9 @@
         "test": "npm run build:tests && node scripts/test.js",
         "publish": "node scripts/publish.js"
     },
-    "dependencies": {},
+    "dependencies": {
+        "ev3dev-lang": "^1.0.0"
+    },
     "devDependencies": {
         "@types/jasmine": "~2.8.3",
         "@types/jasminewd2": "~2.0.2",
