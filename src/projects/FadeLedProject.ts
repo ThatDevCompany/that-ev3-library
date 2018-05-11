@@ -1,5 +1,5 @@
 import {IProject} from './IProject';
-import * as ev3dev from 'ev3dev-lang/bin';
+import {Ev3Leds} from '../ev3dev';
 
 /**
  * A clone of the ev3dev fade led project
@@ -18,8 +18,8 @@ export const FadeLedProject: IProject = {
 			let brightnessVal = (pct / 100);
 			let invertedBrightnessVal = 1 - brightnessVal;
 
-			ev3dev.Ev3Leds.left.setColor([ brightnessVal, invertedBrightnessVal ], 0);
-			ev3dev.Ev3Leds.right.setColor([ brightnessVal, invertedBrightnessVal ], 0);
+			Ev3Leds.left.setColor([ brightnessVal, invertedBrightnessVal ], 0);
+			Ev3Leds.right.setColor([ brightnessVal, invertedBrightnessVal ], 0);
 
 			if (pct % 10 === 0) {
 				console.log(pct + '%');
@@ -34,7 +34,7 @@ export const FadeLedProject: IProject = {
 
 		console.log('done');
 
-		ev3dev.Ev3Leds.left.allOff();
-		ev3dev.Ev3Leds.right.allOff();
+		Ev3Leds.left.allOff();
+		Ev3Leds.right.allOff();
 	}
 };

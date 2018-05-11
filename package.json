@@ -18,9 +18,7 @@
         "test": "npm run build:tests && node scripts/test.js",
         "publish": "node scripts/publish.js"
     },
-    "dependencies": {
-        "ev3dev-lang": "^1.0.0"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@types/jasmine": "~2.8.3",
         "@types/jasminewd2": "~2.0.2",

@@ -1,5 +1,5 @@
 import {IProject} from './IProject';
-import * as ev3dev from 'ev3dev-lang/bin';
+import {PowerSupply} from '../ev3dev';
 
 /**
  * A clone of the ev3dev battery metadata project
@@ -12,7 +12,7 @@ export const BatteryProject: IProject = {
 	name: 'Battery Project',
 
 	run() {
-		let battery = new ev3dev.PowerSupply('test');
+		let battery = new PowerSupply('test');
 		console.log('Default Battery --------------');
 
 		if (battery.connected) {

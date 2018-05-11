@@ -1,5 +1,5 @@
 import {IProject} from './IProject';
-import * as ev3dev from 'ev3dev-lang/bin';
+import {Motor, Sensor} from '../ev3dev';
 
 /**
  * An example project which demonstrates the majority of the available
@@ -18,7 +18,7 @@ export const DemoProject: IProject = {
 		console.log('Motor --------------');
 
 		// Pick the first connected motor
-		let motor = new ev3dev.Motor();
+		let motor = new Motor();
 
 		if (!motor.connected) {
 			console.log('No motor could be found. Are you sure that one is connected?');
@@ -49,7 +49,7 @@ export const DemoProject: IProject = {
 		// Read sensor
 		console.log('Sensor -------------');
 		// Pick the first connected sensor
-		let sensor = new ev3dev.Sensor();
+		let sensor = new Sensor();
 
 		if (!sensor.connected) {
 			console.log('No sensor could be found. Are you sure that one is connected?');
