@@ -1,3 +1,3 @@
-# That BrickPi3 Library
-A library of BrickPi3 projects, utilities and tools to be
-run within the that-brickpi3-robot project
+# That ev3dev Library
+A library of ev3dev projects, utilities and tools to be
+run on an ev3dev robot

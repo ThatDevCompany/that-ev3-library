@@ -1,7 +1,7 @@
 {
-    "name": "that-brickpi3-library",
-    "description": "A library of BrickPi3 projects, utilities and tools to be run within the that-brickpi3-robot project",
-    "version": "0.0.3",
+    "name": "that-ev3-library",
+    "description": "A library of ev3Dev projects, utilities and tools to be on an EV3Dev based robot",
+    "version": "0.0.2",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -10,7 +10,6 @@
     "contributors": [
         "Stephen James <steve@thatdevcompany.com> (http://thatdevcompany.com)"
     ],
-    "main": "index.js",
     "scripts": {
         "lint": "node scripts/lint.js",
         "build:scripts": "tsc -p scripts/tsconfig.json",
