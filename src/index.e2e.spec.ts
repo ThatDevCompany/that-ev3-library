@@ -6,6 +6,7 @@ describe('E2E', () => {
 		const robot = new EV3.Robot();
 		robot.load(EV3.DemoProject);
 		robot.run();
+		expect(true).toBeTruthy();
 	});
 
 });

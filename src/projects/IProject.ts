@@ -8,4 +8,6 @@ export interface IProject {
 	 */
 	name: string;
 
+	run(): void;
+
 }

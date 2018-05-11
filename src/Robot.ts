@@ -23,11 +23,12 @@ export class Robot {
 	run(): void {
 		const p = this._project;
 		if (!p) {
-			console.error('Must load a project first. Run robot.loadProject(project) and try again.');
+			console.warn('Must load a project first. Run robot.load(project) and try again.');
 			return;
 		}
 
 		console.log('Running ' + p.name);
+		p.run();
 	}
 
 }
