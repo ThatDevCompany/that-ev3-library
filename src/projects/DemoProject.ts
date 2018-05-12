@@ -1,5 +1,5 @@
 import {IProject} from './IProject';
-import {Motor, Sensor} from '../ev3dev';
+import {TachoMotor, Sensor} from '../ev3dev';
 
 /**
  * An example project which demonstrates the majority of the available
@@ -18,7 +18,7 @@ export const DemoProject: IProject = {
 		console.log('Motor --------------');
 
 		// Pick the first connected motor
-		let motor = new Motor();
+		let motor = new TachoMotor();
 
 		if (!motor.connected) {
 			console.log('No motor could be found. Are you sure that one is connected?');
