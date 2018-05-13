@@ -120,6 +120,7 @@ export class TachoMotor extends IndexedDevice {
     get dutyCycleSp(): number {
         return this.readPropertyAsNumber('duty_cycle_sp');
     }
+
     set dutyCycleSp(value: number) {
         this.setPropertyFromNumber('duty_cycle_sp', value);
     }
@@ -147,6 +148,7 @@ export class TachoMotor extends IndexedDevice {
     get polarity(): Polarity {
         return <Polarity> this.readProperty('polarity');
     }
+
     set polarity(value: Polarity) {
         this.setProperty('polarity', value);
     }
@@ -180,6 +182,7 @@ export class TachoMotor extends IndexedDevice {
     get speedSp(): number {
         return this.readPropertyAsNumber('speed_sp');
     }
+
     set speedSp(value: number) {
         this.setPropertyFromNumber('speed_sp', value);
     }
@@ -193,6 +196,7 @@ export class TachoMotor extends IndexedDevice {
     get stopAction(): TachoStopAction {
         return <TachoStopAction> this.readProperty('stop_action');
     }
+
     set stopAction(value: TachoStopAction) {
         this.setProperty('stop_action', value);
     }
@@ -205,6 +209,7 @@ export class TachoMotor extends IndexedDevice {
     get timeSp(): number {
         return this.readPropertyAsNumber('time_sp');
     }
+
     set timeSp(value: number) {
         this.setPropertyFromNumber('time_sp', value);
     }
@@ -218,6 +223,7 @@ export class TachoMotor extends IndexedDevice {
     get position(): number {
         return this.readPropertyAsNumber('position');
     }
+
     set position(value: number) {
         this.setPropertyFromNumber('position', value);
     }
@@ -231,6 +237,7 @@ export class TachoMotor extends IndexedDevice {
     get positionSp(): number {
         return this.readPropertyAsNumber('position_sp');
     }
+
     set positionSp(value: number) {
         this.setPropertyFromNumber('position_sp', value);
     }
@@ -274,6 +281,7 @@ export class TachoMotor extends IndexedDevice {
     protected get positionP(): number {
         return this.readPropertyAsNumber('hold_pid/Kp');
     }
+
     protected set positionP(value: number) {
         this.setPropertyFromNumber('hold_pid/Kp', value);
     }
@@ -284,6 +292,7 @@ export class TachoMotor extends IndexedDevice {
     protected get positionI(): number {
         return this.readPropertyAsNumber('hold_pid/Ki');
     }
+
     protected set positionI(value: number) {
         this.setPropertyFromNumber('hold_pid/Ki', value);
     }
@@ -294,6 +303,7 @@ export class TachoMotor extends IndexedDevice {
     protected get positionD(): number {
         return this.readPropertyAsNumber('hold_pid/Kd');
     }
+
     protected set positionD(value: number) {
         this.setPropertyFromNumber('hold_pid/Kd', value);
     }
@@ -308,6 +318,7 @@ export class TachoMotor extends IndexedDevice {
     protected get rampUpSp(): number {
         return this.readPropertyAsNumber('ramp_up_sp');
     }
+
     protected set rampUpSp(value: number) {
         this.setPropertyFromNumber('ramp_up_sp', value);
     }
@@ -322,6 +333,7 @@ export class TachoMotor extends IndexedDevice {
     protected get rampDownSp(): number {
         return this.readPropertyAsNumber('ramp_down_sp');
     }
+
     protected set rampDownSp(value: number) {
         this.setPropertyFromNumber('ramp_down_sp', value);
     }
@@ -332,6 +344,7 @@ export class TachoMotor extends IndexedDevice {
     protected get speedP(): number {
         return this.readPropertyAsNumber('speed_pid/Kp');
     }
+
     protected set speedP(value: number) {
         this.setPropertyFromNumber('speed_pid/Kp', value);
     }
@@ -342,6 +355,7 @@ export class TachoMotor extends IndexedDevice {
     protected get speedI(): number {
         return this.readPropertyAsNumber('speed_pid/Ki');
     }
+
     protected set speedI(value: number) {
         this.setPropertyFromNumber('speed_pid/Ki', value);
     }
@@ -352,6 +366,7 @@ export class TachoMotor extends IndexedDevice {
     protected get speedD(): number {
         return this.readPropertyAsNumber('speed_pid/Kd');
     }
+
     protected set speedD(value: number) {
         this.setPropertyFromNumber('speed_pid/Kd', value);
     }

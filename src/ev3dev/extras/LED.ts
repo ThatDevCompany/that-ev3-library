@@ -20,6 +20,7 @@ export class LED extends Device {
     get brightness(): number {
         return this.readPropertyAsNumber('brightness') / this.maxBrightness;
     }
+
     set brightness(value: number) {
         this.setPropertyFromNumber('brightness', Math.round(this.maxBrightness * value));
     }
@@ -50,6 +51,7 @@ export class LED extends Device {
     protected get trigger(): string {
         return this.readPropertyAsSelector('trigger');
     }
+
     protected set trigger(value: string) {
         this.setProperty('trigger', value);
     }
@@ -59,9 +61,10 @@ export class LED extends Device {
      * 0 and the current brightness setting. The `on` time can
      * be specified via `delay_on` attribute in milliseconds.
      */
-    protected  get delayOn(): number {
+    protected get delayOn(): number {
         return this.readPropertyAsNumber('delay_on');
     }
+
     protected set delayOn(value: number) {
         this.setPropertyFromNumber('delay_on', value);
     }
@@ -74,6 +77,7 @@ export class LED extends Device {
     protected get delayOff(): number {
         return this.readPropertyAsNumber('delay_off');
     }
+
     protected set delayOff(value: number) {
         this.setPropertyFromNumber('delay_off', value);
     }

@@ -28,6 +28,7 @@ export class I2CSensor extends Sensor {
     get pollMs(): number {
         return this.readPropertyAsNumber('poll_ms');
     }
+
     set pollMs(value: number) {
         this.setPropertyFromNumber('poll_ms', value);
     }

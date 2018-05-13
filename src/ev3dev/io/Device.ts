@@ -8,12 +8,13 @@ import * as path from 'path';
 export class Device {
     protected _deviceRoot: string;
     protected _deviceDirName: string;
-    protected _connected: boolean = false;
     protected _clockSpeed = 50;
     protected _overrideSysClassDir: string = null;
     protected _sysClassDir: string = '/sys/class';
     protected _handlers: Array<EventHandler> = [];
     protected _clock: NodeJS.Timer = null;
+
+    protected _connected: boolean = false;
 
     /**
      * Returns true if the device has been successfully connected
@@ -85,7 +86,7 @@ export class Device {
         try {
             return fs.readFileSync(propertyPath).toString();
 
-        // Catch and throw any errors
+            // Catch and throw any errors
         } catch (e) {
             console.error(e);
             throw new Error('There was an error while reading from the property file ' + propertyPath);
@@ -196,7 +197,7 @@ export class Device {
                 this._clockSpeed
             );
 
-        // If noone is handling events and we have a ticking clock, stop it
+            // If noone is handling events and we have a ticking clock, stop it
         } else if (!this._handlers.length && this._clock) {
             clearInterval(this._clock);
             this._clock = null;

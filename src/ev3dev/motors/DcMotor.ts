@@ -7,6 +7,7 @@ export enum DcCommand {
     RUN_DIRECT = 'run-direct',
     STOP = 'stop'
 }
+
 export enum DcState {
     RUNNING = 'running',
     RAMPING = 'ramping'
@@ -61,6 +62,7 @@ export class DcMotor extends IndexedDevice {
     get dutyCycleSp(): number {
         return this.readPropertyAsNumber('duty_cycle_sp');
     }
+
     set dutyCycleSp(value: number) {
         this.setPropertyFromNumber('duty_cycle_sp', value);
     }
@@ -71,6 +73,7 @@ export class DcMotor extends IndexedDevice {
     get polarity(): Polarity {
         return <Polarity> this.readProperty('polarity');
     }
+
     set polarity(value: Polarity) {
         this.setProperty('polarity', value);
     }
@@ -83,6 +86,7 @@ export class DcMotor extends IndexedDevice {
     get timeSp(): number {
         return this.readPropertyAsNumber('time_sp');
     }
+
     set timeSp(value: number) {
         this.setPropertyFromNumber('time_sp', value);
     }
@@ -126,6 +130,7 @@ export class DcMotor extends IndexedDevice {
     protected get rampDownSp(): number {
         return this.readPropertyAsNumber('ramp_down_sp');
     }
+
     protected set rampDownSp(value: number) {
         this.setPropertyFromNumber('ramp_down_sp', value);
     }
@@ -137,6 +142,7 @@ export class DcMotor extends IndexedDevice {
     protected get rampUpSp(): number {
         return this.readPropertyAsNumber('ramp_up_sp');
     }
+
     protected set rampUpSp(value: number) {
         this.setPropertyFromNumber('ramp_up_sp', value);
     }

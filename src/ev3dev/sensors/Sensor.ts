@@ -56,6 +56,7 @@ export class Sensor extends IndexedDevice {
     protected get mode(): string {
         return this.readProperty('mode');
     }
+
     protected set mode(value: string) {
         this.setProperty('mode', value);
     }

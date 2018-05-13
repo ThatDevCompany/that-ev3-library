@@ -10,7 +10,7 @@ export class PowerSupply extends Device {
      */
     constructor(public deviceName: string) {
         super();
-        this.connect('power_supply', deviceName, (!deviceName) ? { scope: 'System' } : {});
+        this.connect('power_supply', deviceName, (!deviceName) ? {scope: 'System'} : {});
     }
 
     /**

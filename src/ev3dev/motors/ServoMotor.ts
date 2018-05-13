@@ -42,6 +42,7 @@ export class ServoMotor extends IndexedDevice {
     get maxPulseSp(): number {
         return this.readPropertyAsNumber('max_pulse_sp');
     }
+
     set maxPulseSp(value: number) {
         this.setPropertyFromNumber('max_pulse_sp', value);
     }
@@ -57,6 +58,7 @@ export class ServoMotor extends IndexedDevice {
     get midPulseSp(): number {
         return this.readPropertyAsNumber('mid_pulse_sp');
     }
+
     set midPulseSp(value: number) {
         this.setPropertyFromNumber('mid_pulse_sp', value);
     }
@@ -70,6 +72,7 @@ export class ServoMotor extends IndexedDevice {
     get minPulseSp(): number {
         return this.readPropertyAsNumber('min_pulse_sp');
     }
+
     set minPulseSp(value: number) {
         this.setPropertyFromNumber('min_pulse_sp', value);
     }
@@ -83,6 +86,7 @@ export class ServoMotor extends IndexedDevice {
     get polarity(): Polarity {
         return <Polarity> this.readProperty('polarity');
     }
+
     set polarity(value: Polarity) {
         this.setProperty('polarity', value);
     }
@@ -96,6 +100,7 @@ export class ServoMotor extends IndexedDevice {
     get positionSp(): number {
         return this.readPropertyAsNumber('position_sp');
     }
+
     set positionSp(value: number) {
         this.setPropertyFromNumber('position_sp', value);
     }
@@ -111,6 +116,7 @@ export class ServoMotor extends IndexedDevice {
     get rateSp(): number {
         return this.readPropertyAsNumber('rate_sp');
     }
+
     set rateSp(value: number) {
         this.setPropertyFromNumber('rate_sp', value);
     }

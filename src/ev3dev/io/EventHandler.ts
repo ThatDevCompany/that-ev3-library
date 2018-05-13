@@ -11,7 +11,8 @@ export class EventHandler {
         private eventPredicate: (userData?: any) => boolean,
         private firstTriggerOnly: boolean = true,
         private userData?: any
-    ) {}
+    ) {
+    }
 
     /**
      * Calls this event's predicate and invokes its callback if the

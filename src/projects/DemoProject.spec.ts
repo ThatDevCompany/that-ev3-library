@@ -2,7 +2,11 @@ import {DemoProject} from './DemoProject';
 
 describe('DemoProject', () => {
 
-	it('should contain a name', () => {
+    it('should be an object', () => {
+        expect(typeof DemoProject).toEqual('object');
+    });
+
+    it('should contain a name', () => {
 		expect(DemoProject.hasOwnProperty('name')).toBeTruthy();
 	})
 
