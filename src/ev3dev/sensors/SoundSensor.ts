@@ -4,7 +4,6 @@
  * LEGO NXT Sound Sensor
  */
 export class SoundSensor extends Sensor {
-
     /**
      * Constructor
      */
@@ -18,7 +17,7 @@ export class SoundSensor extends Sensor {
      */
     get soundPressure(): number {
         this.mode = 'DB';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
     /**
@@ -27,7 +26,7 @@ export class SoundSensor extends Sensor {
      */
     get soundPressureLow(): number {
         this.mode = 'DBA';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
 }

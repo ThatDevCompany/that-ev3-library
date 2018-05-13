@@ -4,6 +4,9 @@
  * LEGO EV3 gyro sensor.
  */
 export class GyroSensor extends Sensor {
+    /**
+     * Constructor
+     */
     constructor(port?: string) {
         super(port, ['lego-ev3-gyro']);
     }
@@ -14,7 +17,7 @@ export class GyroSensor extends Sensor {
      */
     get angle(): number {
         this.mode = 'GYRO-ANG';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
     /**
@@ -22,7 +25,7 @@ export class GyroSensor extends Sensor {
      */
     get rate(): number {
         this.mode = 'GYRO-RATE';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
 }

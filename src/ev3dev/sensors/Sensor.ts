@@ -26,37 +26,6 @@ export class Sensor extends IndexedDevice {
     }
 
     /**
-     * Returns the name of the port that the sensor is connected to, e.g. `ev3:in1`.
-     * I2C sensors also include the I2C address (decimal), e.g. `ev3:in1:i2c8`.
-     */
-    get address(): string {
-        return this.readString('address');
-    }
-
-    /**
-     * Sends a command to the sensor.
-     */
-    set command(value: string) {
-        this.setString('command', value);
-    }
-
-    /**
-     * Returns a list of the valid commands for the sensor.
-     * Returns -EOPNOTSUPP if no commands are supported.
-     */
-    get commands(): string[] {
-        return this.readStringArray('commands');
-    }
-
-    /**
-     * Returns the number of decimal places for the values in the `value<N>`
-     * attributes of the current mode.
-     */
-    get decimals(): number {
-        return this.readNumber('decimals');
-    }
-
-    /**
      * Returns the name of the sensor device/driver. See the list of [supported
      * sensors] for a complete list of drivers.
      */
@@ -65,25 +34,51 @@ export class Sensor extends IndexedDevice {
     }
 
     /**
-     * Returns the current mode. Writing one of the values returned by `modes`
-     * sets the sensor to that mode.
+     * Returns the name of the port that the sensor is connected to, e.g. `ev3:in1`.
+     * I2C sensors also include the I2C address (decimal), e.g. `ev3:in1:i2c8`.
      */
-    get mode(): string {
-        return this.readString('mode');
+    get address(): string {
+        return this.readString('address');
+    }
+
+    /**
+     * Returns the units of the measured value for the current mode. May return
+     * empty string
+     */
+    protected get units(): string {
+        return this.readString('units');
     }
 
     /**
      * Returns the current mode. Writing one of the values returned by `modes`
      * sets the sensor to that mode.
      */
-    set mode(value: string) {
+    protected get mode(): string {
+        return this.readString('mode');
+    }
+    protected set mode(value: string) {
         this.setString('mode', value);
+    }
+
+    /**
+     * Sends a command to the sensor.
+     */
+    protected set command(value: string) {
+        this.setString('command', value);
+    }
+
+    /**
+     * Returns a list of the valid commands for the sensor.
+     * Returns -EOPNOTSUPP if no commands are supported.
+     */
+    protected get commands(): string[] {
+        return this.readStringArray('commands');
     }
 
     /**
      * Returns a list of the valid modes for the sensor.
      */
-    get modes(): string[] {
+    protected get modes(): string[] {
         return this.readStringArray('modes');
     }
 
@@ -91,23 +86,20 @@ export class Sensor extends IndexedDevice {
      * Returns the number of `value<N>` attributes that will return a valid value
      * for the current mode.
      */
-    get numValues(): number {
+    protected get numValues(): number {
         return this.readNumber('num_values');
     }
 
     /**
-     * Returns the units of the measured value for the current mode. May return
-     * empty string
+     * Returns the number of decimal places for the values in the `value<N>`
+     * attributes of the current mode.
      */
-    get units(): string {
-        return this.readString('units');
+    protected get decimals(): number {
+        return this.readNumber('decimals');
     }
 
-    public getValue(valueIndex: number): number {
+    protected getValue(valueIndex: number): number {
         return this.readNumber('value' + valueIndex);
     }
 
-    public getFloatValue(valueIndex: number): number {
-        return this.getValue(valueIndex) / Math.pow(10, this.decimals);
-    }
 }

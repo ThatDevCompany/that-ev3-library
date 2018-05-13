@@ -1,6 +1,29 @@
 ﻿import {Sensor} from './Sensor';
 
 /**
+ * A simple RGB color type (TODO: replace with threeJS color type)
+ * */
+export type RGBColor = {
+    r: number;  // 0 to 1
+    g: number;  // 0 to 1
+    b: number;  // 0 to 1
+}
+
+/**
+ * The basic set of color intepretations given directly by the LEGO EV3 color sensor
+ */
+export enum EV3Color {
+    NONE,
+    BLACK,
+    BLUE,
+    GREEN,
+    YELLOW,
+    RED,
+    WHITE,
+    BROWN
+}
+
+/**
  * LEGO EV3 color sensor.
  */
 export class ColorSensor extends Sensor {
@@ -13,7 +36,7 @@ export class ColorSensor extends Sensor {
      */
     get reflectedLightIntensity(): number {
         this.mode = 'COL-REFLECT';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
     /**
@@ -21,11 +44,11 @@ export class ColorSensor extends Sensor {
      */
     get ambientLightIntensity(): number {
         this.mode = 'COL-AMBIENT';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
     /**
-     * Color detected by the sensor, categorized by overall value.
+     * The EV3 Color detected by the sensor, categorized by overall value.
      *   - 0: No color
      *   - 1: Black
      *   - 2: Blue
@@ -35,33 +58,20 @@ export class ColorSensor extends Sensor {
      *   - 6: White
      *   - 7: Brown
      */
-    get color(): number {
+    get color(): EV3Color {
         this.mode = 'COL-COLOR';
-        return Number(this.getFloatValue(0));
+        return <EV3Color> this.getValue(0);
     }
 
     /**
-     * Red component of the detected color, in the range 0-1020.
+     * The RGB of the color detected by the sensor
      */
-    get red(): number {
+    get rgbColor(): RGBColor {
         this.mode = 'RGB-RAW';
-        return Number(this.getFloatValue(0));
+        return {
+            r: this.getValue(0) / 1020,
+            g: this.getValue(1) / 1020,
+            b: this.getValue(2) / 1020
+        };
     }
-
-    /**
-     * Green component of the detected color, in the range 0-1020.
-     */
-    get green(): number {
-        this.mode = 'RGB-RAW';
-        return Number(this.getFloatValue(1));
-    }
-
-    /**
-     * Blue component of the detected color, in the range 0-1020.
-     */
-    get blue(): number {
-        this.mode = 'RGB-RAW';
-        return Number(this.getFloatValue(2));
-    }
-
 }

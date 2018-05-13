@@ -16,6 +16,6 @@ export class TouchSensor extends Sensor {
      */
     get isPressed(): boolean {
         this.mode = 'TOUCH';
-        return Boolean(this.getFloatValue(0));
+        return !!this.getValue(0);
     }
 }

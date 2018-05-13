@@ -4,6 +4,9 @@
  * LEGO EV3 infrared sensor.
  */
 export class InfraredSensor extends Sensor {
+    /**
+     * Constructor
+     */
     constructor(port?: string) {
         super(port, ['lego-ev3-ir']);
     }
@@ -14,7 +17,7 @@ export class InfraredSensor extends Sensor {
      */
     get proximity(): number {
         this.mode = 'IR-PROX';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
 }

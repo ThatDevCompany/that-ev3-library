@@ -4,6 +4,9 @@
  * LEGO NXT Light Sensor
  */
 export class LightSensor extends Sensor {
+    /**
+     * Constructor
+     */
     constructor(port?: string) {
         super(port, ['lego-nxt-light']);
     }
@@ -13,7 +16,7 @@ export class LightSensor extends Sensor {
      */
     get reflectedLightIntensity(): number {
         this.mode = 'REFLECT';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
     /**
@@ -21,7 +24,7 @@ export class LightSensor extends Sensor {
      */
     get ambientLightIntensity(): number {
         this.mode = 'AMBIENT';
-        return Number(this.getFloatValue(0));
+        return this.getValue(0);
     }
 
 }
