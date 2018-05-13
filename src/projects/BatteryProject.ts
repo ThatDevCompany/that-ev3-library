@@ -19,14 +19,12 @@ export const BatteryProject: IProject = {
 			console.log('  Technology: ' + battery.technology);
 			console.log('  Type: ' + battery.type);
 
-			console.log('  Current (microamps): ' + battery.measuredCurrent);
-			console.log('  Current (amps): ' + battery.currentAmps);
+			console.log('  Current (amps): ' + battery.current);
 
-			console.log('  Voltage (microvolts): ' + battery.measuredVoltage);
-			console.log('  Voltage (volts): ' + battery.voltageVolts);
+			console.log('  Voltage (volts): ' + battery.voltage);
 
-			console.log('  Max voltage (microvolts): ' + battery.maxVoltage);
-			console.log('  Min voltage (microvolts): ' + battery.minVoltage);
+			console.log('  Max voltage (volts): ' + battery.maxVoltage);
+			console.log('  Min voltage (volts): ' + battery.minVoltage);
 
 		} else {
 			console.log('  Battery not connected!');

@@ -13,7 +13,7 @@ export class LEDGroup {
     /**
      * Constructor
      */
-    constructor(leds: Array<string | LED>) {
+    constructor(...leds: (string | LED)[]) {
         this._leds = leds.map(led => (led instanceof LED) ? led : new LED(led));
     }
 

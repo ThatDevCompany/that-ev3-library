@@ -1,5 +1,5 @@
 import {IProject} from './IProject';
-import {TachoMotor, Sensor} from '../ev3dev';
+import {TachoMotor, Sensor, TachoStopAction, TachoCommand} from '../ev3dev';
 
 /**
  * An example project which demonstrates the majority of the available
@@ -27,13 +27,12 @@ export const DemoProject: IProject = {
 
 		console.log(' Port: ' + motor.address);
 		console.log(' Driver: ' + motor.driverName);
-		console.log(' Available commands: ' + motor.commands);
 
 		console.log('Sending motor command...');
 
-		motor.rampUpSp = 100;
-		motor.rampDownSp = 100;
-		motor.runForTime(1000, motor.maxSpeed / 2, motor.stopActionValues.brake);
+		// motor.rampUpSp = 100;
+		// motor.rampDownSp = 100;
+		motor.runForTime(1000, motor.maxSpeed / 2, TachoStopAction.BRAKE);
 
 		do {
 			console.log('Motor speed: ' + motor.speed);
@@ -59,10 +58,6 @@ export const DemoProject: IProject = {
 		console.log(' Port: ' + sensor.address);
 		console.log(' Driver: ' + sensor.driverName);
 
-		console.log('Reading all sensor values...');
-		for (let i = 0; i < sensor.numValues; i++) {
-			console.log(' Value ' + i + ': ' + sensor.getValue(i) + ', ' + sensor.getFloatValue(i));
-		}
 		console.log('--------------------');
 		console.log('Core motor and sensor test complete');
 	}
