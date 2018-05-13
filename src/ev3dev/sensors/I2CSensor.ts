@@ -16,7 +16,7 @@ export class I2CSensor extends Sensor {
      * I2C/NXT sensors support this.
      */
     get fwVersion(): string {
-        return this.readString('fw_version');
+        return this.readProperty('fw_version');
     }
 
     /**
@@ -26,9 +26,9 @@ export class I2CSensor extends Sensor {
      * Currently only I2C/NXT sensors support changing the polling period.
      */
     get pollMs(): number {
-        return this.readNumber('poll_ms');
+        return this.readPropertyAsNumber('poll_ms');
     }
     set pollMs(value: number) {
-        this.setNumber('poll_ms', value);
+        this.setPropertyFromNumber('poll_ms', value);
     }
 }

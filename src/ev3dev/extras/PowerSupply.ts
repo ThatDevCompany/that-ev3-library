@@ -17,41 +17,41 @@ export class PowerSupply extends Device {
      * The current that the battery is supplying (in amps)
      */
     get current(): number {
-        return this.readNumber('current_now') / 1000000;
+        return this.readPropertyAsNumber('current_now') / 1000000;
     }
 
     /**
      * The voltage that the battery is supplying (in volts)
      */
     get voltage(): number {
-        return this.readNumber('voltage_now') / 1000000;
+        return this.readPropertyAsNumber('voltage_now') / 1000000;
     }
 
     /**
      * The maximum voltage (in volts)
      */
     get maxVoltage(): number {
-        return this.readNumber('voltage_max_design') / 1000000;
+        return this.readPropertyAsNumber('voltage_max_design') / 1000000;
     }
 
     /**
      * The minimum voltage (in volts)
      */
     get minVoltage(): number {
-        return this.readNumber('voltage_min_design') / 1000000;
+        return this.readPropertyAsNumber('voltage_min_design') / 1000000;
     }
 
     /**
      * The name of the tech
      */
     get technology(): string {
-        return this.readString('technology');
+        return this.readProperty('technology');
     }
 
     /**
      * The type of the powersupply
      */
     get type(): string {
-        return this.readString('type');
+        return this.readProperty('type');
     }
 }

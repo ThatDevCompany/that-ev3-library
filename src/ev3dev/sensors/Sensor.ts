@@ -30,7 +30,7 @@ export class Sensor extends IndexedDevice {
      * sensors] for a complete list of drivers.
      */
     get driverName(): string {
-        return this.readString('driver_name');
+        return this.readProperty('driver_name');
     }
 
     /**
@@ -38,7 +38,7 @@ export class Sensor extends IndexedDevice {
      * I2C sensors also include the I2C address (decimal), e.g. `ev3:in1:i2c8`.
      */
     get address(): string {
-        return this.readString('address');
+        return this.readProperty('address');
     }
 
     /**
@@ -46,7 +46,7 @@ export class Sensor extends IndexedDevice {
      * empty string
      */
     protected get units(): string {
-        return this.readString('units');
+        return this.readProperty('units');
     }
 
     /**
@@ -54,17 +54,17 @@ export class Sensor extends IndexedDevice {
      * sets the sensor to that mode.
      */
     protected get mode(): string {
-        return this.readString('mode');
+        return this.readProperty('mode');
     }
     protected set mode(value: string) {
-        this.setString('mode', value);
+        this.setProperty('mode', value);
     }
 
     /**
      * Sends a command to the sensor.
      */
     protected set command(value: string) {
-        this.setString('command', value);
+        this.setProperty('command', value);
     }
 
     /**
@@ -72,14 +72,14 @@ export class Sensor extends IndexedDevice {
      * Returns -EOPNOTSUPP if no commands are supported.
      */
     protected get commands(): string[] {
-        return this.readStringArray('commands');
+        return this.readPropertyAsArray('commands');
     }
 
     /**
      * Returns a list of the valid modes for the sensor.
      */
     protected get modes(): string[] {
-        return this.readStringArray('modes');
+        return this.readPropertyAsArray('modes');
     }
 
     /**
@@ -87,7 +87,7 @@ export class Sensor extends IndexedDevice {
      * for the current mode.
      */
     protected get numValues(): number {
-        return this.readNumber('num_values');
+        return this.readPropertyAsNumber('num_values');
     }
 
     /**
@@ -95,11 +95,11 @@ export class Sensor extends IndexedDevice {
      * attributes of the current mode.
      */
     protected get decimals(): number {
-        return this.readNumber('decimals');
+        return this.readPropertyAsNumber('decimals');
     }
 
     protected getValue(valueIndex: number): number {
-        return this.readNumber('value' + valueIndex);
+        return this.readPropertyAsNumber('value' + valueIndex);
     }
 
 }

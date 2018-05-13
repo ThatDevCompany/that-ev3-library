@@ -50,7 +50,7 @@ export class DcMotor extends IndexedDevice {
      * are -100 to 100 (-100% to 100%).
      */
     get dutyCycle(): number {
-        return this.readNumber('duty_cycle');
+        return this.readPropertyAsNumber('duty_cycle');
     }
 
     /**
@@ -59,20 +59,20 @@ export class DcMotor extends IndexedDevice {
      * setpoint.
      */
     get dutyCycleSp(): number {
-        return this.readNumber('duty_cycle_sp');
+        return this.readPropertyAsNumber('duty_cycle_sp');
     }
     set dutyCycleSp(value: number) {
-        this.setNumber('duty_cycle_sp', value);
+        this.setPropertyFromNumber('duty_cycle_sp', value);
     }
 
     /**
      * Sets the polarity of the motor. Valid values are `normal` and `inversed`.
      */
     get polarity(): Polarity {
-        return this.readStringAsType<Polarity>('polarity');
+        return <Polarity> this.readProperty('polarity');
     }
     set polarity(value: Polarity) {
-        this.setString('polarity', value);
+        this.setProperty('polarity', value);
     }
 
     /**
@@ -81,17 +81,17 @@ export class DcMotor extends IndexedDevice {
      * milliseconds.
      */
     get timeSp(): number {
-        return this.readNumber('time_sp');
+        return this.readPropertyAsNumber('time_sp');
     }
     set timeSp(value: number) {
-        this.setNumber('time_sp', value);
+        this.setPropertyFromNumber('time_sp', value);
     }
 
     /**
      * Returns the name of the port that this motor is connected to.
      */
     get address(): string {
-        return this.readString('address');
+        return this.readProperty('address');
     }
 
     /**
@@ -99,7 +99,7 @@ export class DcMotor extends IndexedDevice {
      * of [supported devices] for a list of drivers.
      */
     get driverName(): string {
-        return this.readString('driver_name');
+        return this.readProperty('driver_name');
     }
 
     /**
@@ -108,7 +108,7 @@ export class DcMotor extends IndexedDevice {
      * of the `commands` attribute.
      */
     protected set command(value: DcCommand) {
-        this.setString('command', value);
+        this.setProperty('command', value);
     }
 
     /**
@@ -116,7 +116,7 @@ export class DcMotor extends IndexedDevice {
      * controller.
      */
     protected get commands(): string[] {
-        return this.readStringArray('commands');
+        return this.readPropertyAsArray('commands');
     }
 
     /**
@@ -124,10 +124,10 @@ export class DcMotor extends IndexedDevice {
      * to 0%. Valid values are 0 to 10000 (10 seconds). Default is 0.
      */
     protected get rampDownSp(): number {
-        return this.readNumber('ramp_down_sp');
+        return this.readPropertyAsNumber('ramp_down_sp');
     }
     protected set rampDownSp(value: number) {
-        this.setNumber('ramp_down_sp', value);
+        this.setPropertyFromNumber('ramp_down_sp', value);
     }
 
     /**
@@ -135,10 +135,10 @@ export class DcMotor extends IndexedDevice {
      * 100%. Valid values are 0 to 10000 (10 seconds). Default is 0.
      */
     protected get rampUpSp(): number {
-        return this.readNumber('ramp_up_sp');
+        return this.readPropertyAsNumber('ramp_up_sp');
     }
     protected set rampUpSp(value: number) {
-        this.setNumber('ramp_up_sp', value);
+        this.setPropertyFromNumber('ramp_up_sp', value);
     }
 
     /**
@@ -148,7 +148,7 @@ export class DcMotor extends IndexedDevice {
      * `duty_cycle_sp`.
      */
     protected get state(): string[] {
-        return this.readStringArray('state');
+        return this.readPropertyAsArray('state');
     }
 
     /**
@@ -156,7 +156,7 @@ export class DcMotor extends IndexedDevice {
      * `stop_actions` to get the list of valid values.
      */
     protected set stopAction(value: DcStopAction) {
-        this.setString('stop_action', value);
+        this.setProperty('stop_action', value);
     }
 
     /**
@@ -164,7 +164,7 @@ export class DcMotor extends IndexedDevice {
      * and `brake`.
      */
     protected get stopActions(): string[] {
-        return this.readStringArray('stop_actions');
+        return this.readPropertyAsArray('stop_actions');
     }
 
     runForever(stopAction?: DcStopAction) {

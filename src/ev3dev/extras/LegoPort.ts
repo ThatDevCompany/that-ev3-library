@@ -49,7 +49,7 @@ export class LegoPort extends Device {
      * the name that will be returned.
      */
     get address(): string {
-        return this.readString('address');
+        return this.readProperty('address');
     }
 
     /**
@@ -57,14 +57,14 @@ export class LegoPort extends Device {
      * complete list of drivers in the [list of port drivers].
      */
     get driverName(): string {
-        return this.readString('driver_name');
+        return this.readProperty('driver_name');
     }
 
     /**
      * Returns a list of the available modes of the port.
      */
     get modes(): string[] {
-        return this.readStringArray('modes');
+        return this.readPropertyAsArray('modes');
     }
 
     /**
@@ -74,7 +74,7 @@ export class LegoPort extends Device {
      * this will depend on the individual driver implementing this class.
      */
     get mode(): string {
-        return this.readString('mode');
+        return this.readProperty('mode');
     }
 
     /**
@@ -84,7 +84,7 @@ export class LegoPort extends Device {
      * this will depend on the individual driver implementing this class.
      */
     set mode(value: string) {
-        this.setString('mode', value);
+        this.setProperty('mode', value);
     }
 
     /**
@@ -95,7 +95,7 @@ export class LegoPort extends Device {
      * device is not supported.
      */
     set setDevice(value: string) {
-        this.setString('set_device', value);
+        this.setProperty('set_device', value);
     }
 
     /**
@@ -105,6 +105,6 @@ export class LegoPort extends Device {
      * for the full list of possible values.
      */
     get status(): string {
-        return this.readString('status');
+        return this.readProperty('status');
     }
 }

@@ -1,3 +1,3 @@
 export * from './Device';
-export * from './EventNotificationRequest';
+export * from './EventHandler';
 export * from './IndexedDevice';

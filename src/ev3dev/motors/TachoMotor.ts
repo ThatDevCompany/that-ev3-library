@@ -83,7 +83,7 @@ export class TachoMotor extends IndexedDevice {
      * to convert rotations or degrees to tacho counts. (rotation motors only)
      */
     get countPerRot(): number {
-        return this.readNumber('count_per_rot');
+        return this.readPropertyAsNumber('count_per_rot');
     }
 
     /**
@@ -92,7 +92,7 @@ export class TachoMotor extends IndexedDevice {
      * value to convert from distance to tacho counts. (linear motors only)
      */
     get countPerM(): number {
-        return this.readNumber('count_per_m');
+        return this.readPropertyAsNumber('count_per_m');
     }
 
     /**
@@ -101,7 +101,7 @@ export class TachoMotor extends IndexedDevice {
      * calculate the maximum travel distance of the  (linear motors only)
      */
     get fullTravelCount(): number {
-        return this.readNumber('full_travel_count');
+        return this.readPropertyAsNumber('full_travel_count');
     }
 
     /**
@@ -109,7 +109,7 @@ export class TachoMotor extends IndexedDevice {
      * are -100 to 100.
      */
     get dutyCycle(): number {
-        return this.readNumber('duty_cycle');
+        return this.readPropertyAsNumber('duty_cycle');
     }
 
     /**
@@ -118,24 +118,24 @@ export class TachoMotor extends IndexedDevice {
      * the motor to rotate in reverse.
      */
     get dutyCycleSp(): number {
-        return this.readNumber('duty_cycle_sp');
+        return this.readPropertyAsNumber('duty_cycle_sp');
     }
     set dutyCycleSp(value: number) {
-        this.setNumber('duty_cycle_sp', value);
+        this.setPropertyFromNumber('duty_cycle_sp', value);
     }
 
     /**
      * Returns the name of the port that this motor is connected to.
      */
     get address(): string {
-        return this.readString('address');
+        return this.readProperty('address');
     }
 
     /**
      * Returns the name of the driver that provides this tacho motor device.
      */
     get driverName(): string {
-        return this.readString('driver_name');
+        return this.readProperty('driver_name');
     }
 
     /**
@@ -145,10 +145,10 @@ export class TachoMotor extends IndexedDevice {
      * Valid values are `normal` and `inversed`.
      */
     get polarity(): Polarity {
-        return this.readStringAsType<Polarity>('polarity');
+        return <Polarity> this.readProperty('polarity');
     }
     set polarity(value: Polarity) {
-        this.setString('polarity', value);
+        this.setProperty('polarity', value);
     }
 
     /**
@@ -157,7 +157,7 @@ export class TachoMotor extends IndexedDevice {
      * reach - it's the maximum theoretical speed.
      */
     get maxSpeed(): number {
-        return this.readNumber('max_speed');
+        return this.readPropertyAsNumber('max_speed');
     }
 
     /**
@@ -166,7 +166,7 @@ export class TachoMotor extends IndexedDevice {
      * attribute to convert this value to RPM or deg/sec.
      */
     get speed(): number {
-        return this.readNumber('speed');
+        return this.readPropertyAsNumber('speed');
     }
 
     /**
@@ -178,10 +178,10 @@ export class TachoMotor extends IndexedDevice {
      * convert m/s to tacho counts per second.
      */
     get speedSp(): number {
-        return this.readNumber('speed_sp');
+        return this.readPropertyAsNumber('speed_sp');
     }
     set speedSp(value: number) {
-        this.setNumber('speed_sp', value);
+        this.setPropertyFromNumber('speed_sp', value);
     }
 
     /**
@@ -191,10 +191,10 @@ export class TachoMotor extends IndexedDevice {
      * `stop_actions` for a list of possible values.
      */
     get stopAction(): TachoStopAction {
-        return this.readStringAsType<TachoStopAction>('stop_action');
+        return <TachoStopAction> this.readProperty('stop_action');
     }
     set stopAction(value: TachoStopAction) {
-        this.setString('stop_action', value);
+        this.setProperty('stop_action', value);
     }
 
     /**
@@ -203,10 +203,10 @@ export class TachoMotor extends IndexedDevice {
      * milliseconds.
      */
     get timeSp(): number {
-        return this.readNumber('time_sp');
+        return this.readPropertyAsNumber('time_sp');
     }
     set timeSp(value: number) {
-        this.setNumber('time_sp', value);
+        this.setPropertyFromNumber('time_sp', value);
     }
 
     /**
@@ -216,10 +216,10 @@ export class TachoMotor extends IndexedDevice {
      * Writing will set the position to that value.
      */
     get position(): number {
-        return this.readNumber('position');
+        return this.readPropertyAsNumber('position');
     }
     set position(value: number) {
-        this.setNumber('position', value);
+        this.setPropertyFromNumber('position', value);
     }
 
     /**
@@ -229,10 +229,10 @@ export class TachoMotor extends IndexedDevice {
      * rotations or degrees.
      */
     get positionSp(): number {
-        return this.readNumber('position_sp');
+        return this.readPropertyAsNumber('position_sp');
     }
     set positionSp(value: number) {
-        this.setNumber('position_sp', value);
+        this.setPropertyFromNumber('position_sp', value);
     }
 
     /**
@@ -240,7 +240,7 @@ export class TachoMotor extends IndexedDevice {
      * possible values.
      */
     protected set command(value: TachoCommand) {
-        this.setString('command', value);
+        this.setProperty('command', value);
     }
 
     /**
@@ -265,37 +265,37 @@ export class TachoMotor extends IndexedDevice {
      *   This will also have the effect of stopping the
      */
     protected get commands(): string[] {
-        return this.readStringArray('commands');
+        return this.readPropertyAsArray('commands');
     }
 
     /**
      * The proportional constant for the position PID.
      */
     protected get positionP(): number {
-        return this.readNumber('hold_pid/Kp');
+        return this.readPropertyAsNumber('hold_pid/Kp');
     }
     protected set positionP(value: number) {
-        this.setNumber('hold_pid/Kp', value);
+        this.setPropertyFromNumber('hold_pid/Kp', value);
     }
 
     /**
      * The integral constant for the position PID.
      */
     protected get positionI(): number {
-        return this.readNumber('hold_pid/Ki');
+        return this.readPropertyAsNumber('hold_pid/Ki');
     }
     protected set positionI(value: number) {
-        this.setNumber('hold_pid/Ki', value);
+        this.setPropertyFromNumber('hold_pid/Ki', value);
     }
 
     /**
      * The derivative constant for the position PID.
      */
     protected get positionD(): number {
-        return this.readNumber('hold_pid/Kd');
+        return this.readPropertyAsNumber('hold_pid/Kd');
     }
     protected set positionD(value: number) {
-        this.setNumber('hold_pid/Kd', value);
+        this.setPropertyFromNumber('hold_pid/Kd', value);
     }
 
     /**
@@ -306,10 +306,10 @@ export class TachoMotor extends IndexedDevice {
      * `speed_sp` and the current `speed` and max_speed multiplied by `ramp_up_sp`.
      */
     protected get rampUpSp(): number {
-        return this.readNumber('ramp_up_sp');
+        return this.readPropertyAsNumber('ramp_up_sp');
     }
     protected set rampUpSp(value: number) {
-        this.setNumber('ramp_up_sp', value);
+        this.setPropertyFromNumber('ramp_up_sp', value);
     }
 
     /**
@@ -320,48 +320,48 @@ export class TachoMotor extends IndexedDevice {
      * `speed_sp` and the current `speed` and max_speed multiplied by `ramp_down_sp`.
      */
     protected get rampDownSp(): number {
-        return this.readNumber('ramp_down_sp');
+        return this.readPropertyAsNumber('ramp_down_sp');
     }
     protected set rampDownSp(value: number) {
-        this.setNumber('ramp_down_sp', value);
+        this.setPropertyFromNumber('ramp_down_sp', value);
     }
 
     /**
      * The proportional constant for the speed regulation PID.
      */
     protected get speedP(): number {
-        return this.readNumber('speed_pid/Kp');
+        return this.readPropertyAsNumber('speed_pid/Kp');
     }
     protected set speedP(value: number) {
-        this.setNumber('speed_pid/Kp', value);
+        this.setPropertyFromNumber('speed_pid/Kp', value);
     }
 
     /**
      * The integral constant for the speed regulation PID.
      */
     protected get speedI(): number {
-        return this.readNumber('speed_pid/Ki');
+        return this.readPropertyAsNumber('speed_pid/Ki');
     }
     protected set speedI(value: number) {
-        this.setNumber('speed_pid/Ki', value);
+        this.setPropertyFromNumber('speed_pid/Ki', value);
     }
 
     /**
      * The derivative constant for the speed regulation PID.
      */
     protected get speedD(): number {
-        return this.readNumber('speed_pid/Kd');
+        return this.readPropertyAsNumber('speed_pid/Kd');
     }
     protected set speedD(value: number) {
-        this.setNumber('speed_pid/Kd', value);
+        this.setPropertyFromNumber('speed_pid/Kd', value);
     }
 
     /**
      * Reading returns a list of state flags. Possible flags are
      * `running`, `ramping`, `holding`, `overloaded` and `stalled`.
      */
-    protected get state(): TachoState[] {
-        return this.readStringArrayAsType<TachoState>('state');
+    protected get state(): Array<TachoState> {
+        return <Array<TachoState>> this.readPropertyAsArray('state');
     }
 
     runForever(sp?: number, stopAction?: TachoStopAction) {

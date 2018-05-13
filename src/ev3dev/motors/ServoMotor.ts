@@ -30,7 +30,7 @@ export class ServoMotor extends IndexedDevice {
      * of [supported devices] for a list of drivers.
      */
     get driverName(): string {
-        return this.readString('driver_name');
+        return this.readProperty('driver_name');
     }
 
     /**
@@ -40,10 +40,10 @@ export class ServoMotor extends IndexedDevice {
      * changes to this attribute to take effect.
      */
     get maxPulseSp(): number {
-        return this.readNumber('max_pulse_sp');
+        return this.readPropertyAsNumber('max_pulse_sp');
     }
     set maxPulseSp(value: number) {
-        this.setNumber('max_pulse_sp', value);
+        this.setPropertyFromNumber('max_pulse_sp', value);
     }
 
     /**
@@ -55,10 +55,10 @@ export class ServoMotor extends IndexedDevice {
      * changes to this attribute to take effect.
      */
     get midPulseSp(): number {
-        return this.readNumber('mid_pulse_sp');
+        return this.readPropertyAsNumber('mid_pulse_sp');
     }
     set midPulseSp(value: number) {
-        this.setNumber('mid_pulse_sp', value);
+        this.setPropertyFromNumber('mid_pulse_sp', value);
     }
 
     /**
@@ -68,10 +68,10 @@ export class ServoMotor extends IndexedDevice {
      * attribute for changes to this attribute to take effect.
      */
     get minPulseSp(): number {
-        return this.readNumber('min_pulse_sp');
+        return this.readPropertyAsNumber('min_pulse_sp');
     }
     set minPulseSp(value: number) {
-        this.setNumber('min_pulse_sp', value);
+        this.setPropertyFromNumber('min_pulse_sp', value);
     }
 
     /**
@@ -81,10 +81,10 @@ export class ServoMotor extends IndexedDevice {
      * correspond to `min_pulse_sp`.
      */
     get polarity(): Polarity {
-        return this.readStringAsType<Polarity>('polarity');
+        return <Polarity> this.readProperty('polarity');
     }
     set polarity(value: Polarity) {
-        this.setString('polarity', value);
+        this.setProperty('polarity', value);
     }
 
     /**
@@ -94,10 +94,10 @@ export class ServoMotor extends IndexedDevice {
      * `0` corresponds to `mid_pulse_sp` and `100` corresponds to `max_pulse_sp`.
      */
     get positionSp(): number {
-        return this.readNumber('position_sp');
+        return this.readPropertyAsNumber('position_sp');
     }
     set positionSp(value: number) {
-        this.setNumber('position_sp', value);
+        this.setPropertyFromNumber('position_sp', value);
     }
 
     /**
@@ -109,10 +109,10 @@ export class ServoMotor extends IndexedDevice {
      * servos, this value will affect the rate_sp at which the speed ramps up or down.
      */
     get rateSp(): number {
-        return this.readNumber('rate_sp');
+        return this.readPropertyAsNumber('rate_sp');
     }
     set rateSp(value: number) {
-        this.setNumber('rate_sp', value);
+        this.setPropertyFromNumber('rate_sp', value);
     }
 
     /**
@@ -121,7 +121,7 @@ export class ServoMotor extends IndexedDevice {
      * * `running`: Indicates that the motor is powered.
      */
     protected get state(): string[] {
-        return this.readStringArray('state');
+        return this.readPropertyAsArray('state');
     }
 
     /**
@@ -130,7 +130,7 @@ export class ServoMotor extends IndexedDevice {
      * `position_sp` attribute. Setting to `float` will remove power from the motor.
      */
     protected set command(value: ServoCommand) {
-        this.setString('command', value);
+        this.setProperty('command', value);
     }
 
     run() {

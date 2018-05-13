@@ -18,17 +18,17 @@ export class LED extends Device {
      * Sets the brightness level. Possible values are from 0 to 1.
      */
     get brightness(): number {
-        return this.readNumber('brightness') / this.maxBrightness;
+        return this.readPropertyAsNumber('brightness') / this.maxBrightness;
     }
     set brightness(value: number) {
-        this.setNumber('brightness', Math.round(this.maxBrightness * value));
+        this.setPropertyFromNumber('brightness', Math.round(this.maxBrightness * value));
     }
 
     /**
      * Returns a list of available triggers.
      */
     protected get triggers(): string[] {
-        return this.readStringArray('trigger');
+        return this.readPropertyAsArray('trigger');
     }
 
     /**
@@ -48,10 +48,10 @@ export class LED extends Device {
      * also disable the `timer` trigger.
      */
     protected get trigger(): string {
-        return this.readStringSelector('trigger');
+        return this.readPropertyAsSelector('trigger');
     }
     protected set trigger(value: string) {
-        this.setString('trigger', value);
+        this.setProperty('trigger', value);
     }
 
     /**
@@ -60,10 +60,10 @@ export class LED extends Device {
      * be specified via `delay_on` attribute in milliseconds.
      */
     protected  get delayOn(): number {
-        return this.readNumber('delay_on');
+        return this.readPropertyAsNumber('delay_on');
     }
     protected set delayOn(value: number) {
-        this.setNumber('delay_on', value);
+        this.setPropertyFromNumber('delay_on', value);
     }
 
     /**
@@ -72,17 +72,17 @@ export class LED extends Device {
      * be specified via `delay_off` attribute in milliseconds.
      */
     protected get delayOff(): number {
-        return this.readNumber('delay_off');
+        return this.readPropertyAsNumber('delay_off');
     }
     protected set delayOff(value: number) {
-        this.setNumber('delay_off', value);
+        this.setPropertyFromNumber('delay_off', value);
     }
 
     /**
      * Returns the maximum allowable brightness value.
      */
     protected get maxBrightness(): number {
-        return this.readNumber('max_brightness');
+        return this.readPropertyAsNumber('max_brightness');
     }
 
     /**

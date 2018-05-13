@@ -1,25 +1,34 @@
-﻿import {EventNotificationRequest} from './EventNotificationRequest';
+﻿import {EventHandler} from './EventHandler';
 import * as fs from 'fs';
 import * as path from 'path';
 
+/**
+ * Base device class for all hardware devices
+ */
 export class Device {
-    public static overrideSysClassDir: string = null;
+    protected _deviceRoot: string;
+    protected _deviceDirName: string;
+    protected _connected: boolean = false;
+    protected _clockSpeed = 50;
+    protected _overrideSysClassDir: string = null;
+    protected _sysClassDir: string = '/sys/class';
+    protected _handlers: Array<EventHandler> = [];
+    protected _clock: NodeJS.Timer = null;
 
-    private static eventTimerInterval = 50;
+    /**
+     * Returns true if the device has been successfully connected
+     */
+    get connected(): boolean {
+        return this._connected;
+    }
 
-    public deviceRoot: string;
-    public deviceDirName: string;
-    public connected: boolean = false;
-
-    private sysClassDir: string = '/sys/class';
-
-    private pendingEventRequests: EventNotificationRequest[] = [];
-    private eventTimerCancellationToken: NodeJS.Timer = null;
-
-    public connect(driverName: string, nameConvention?: string, propertyConstraints?: { [propertyName: string]: any }) {
+    /**
+     * Connect to the hardware device
+     */
+    connect(driverName: string, nameConvention?: string, propertyConstraints?: { [propertyName: string]: any }) {
         const nameRegex = nameConvention ? new RegExp(nameConvention) : undefined;
 
-        const deviceSearchDir = path.join(Device.overrideSysClassDir || this.sysClassDir, driverName);
+        const deviceSearchDir = path.join(this._overrideSysClassDir || this._sysClassDir, driverName);
 
         let availableDevices: string[];
         try {
@@ -57,43 +66,55 @@ export class Device {
                 continue;
             }
 
-            this.deviceRoot = currentDeviceDir;
-            this.deviceDirName = currentDeviceDirName;
-            this.connected = true;
+            this._deviceRoot = currentDeviceDir;
+            this._deviceDirName = currentDeviceDirName;
+            this._connected = true;
         }
     }
 
-    public readNumber(property: string, deviceRoot?: string): number {
-        const value = this.readProperty(property, deviceRoot);
+    /**
+     * Read a property value from the device, and return it as a STRING
+     */
+    readProperty(property: string, deviceRoot?: string): string {
+        if (!deviceRoot && !this._connected) {
+            throw new Error('You must be connected to a device before you can read from it. This error probably means that the target device was not found.');
+        }
+        const propertyPath = this.constructPropertyPath(property, deviceRoot);
 
-        if (typeof value !== 'number') {
-            return NaN;
+        // Try and return the value
+        try {
+            return fs.readFileSync(propertyPath).toString();
+
+        // Catch and throw any errors
+        } catch (e) {
+            console.error(e);
+            throw new Error('There was an error while reading from the property file ' + propertyPath);
+
         }
 
-        return value;
     }
 
-    public readString(property: string, deviceRoot?: string): string {
-        const value = this.readProperty(property, deviceRoot);
-        return String(value);
+    /**
+     * Read a property value from the device, and return it as a NUMBER
+     */
+    readPropertyAsNumber(property: string, deviceRoot?: string): number {
+        return Number(this.readProperty(property, deviceRoot));
     }
 
-    public readStringAsType<T>(property: string, deviceRoot?: string): T {
-        return <any>this.readString(property, deviceRoot) as T;
-    }
-
-    public readStringArray(property: string, deviceRoot?: string): string[] {
-        return this.readString(property, deviceRoot)
+    /**
+     * Read a property value from the device, and return it as ARRAY<STRING>
+     */
+    readPropertyAsArray(property: string, deviceRoot?: string): Array<string> {
+        return this.readProperty(property, deviceRoot)
             .split(' ')
             .map((value: string) => value.replace(/^\[|\]$/g, ''));
     }
 
-    public readStringArrayAsType<T>(property: string, deviceRoot?: string): T[] {
-        return <any>this.readStringArray(property, deviceRoot) as T[];
-    }
-
-    public readStringSelector(property: string, deviceRoot?: string): string {
-        const bracketedParts = this.readString(property, deviceRoot)
+    /**
+     * Read a property value from the device, and return it as a string selector ???
+     */
+    readPropertyAsSelector(property: string, deviceRoot?: string): string {
+        const bracketedParts = this.readProperty(property, deviceRoot)
             .split(' ')
             .filter((value: string) => value.match(/^\[|\]$/g) != null);
 
@@ -104,33 +125,11 @@ export class Device {
         return bracketedParts[0].replace(/^\[|\]$/g, '');
     }
 
-    public readProperty(property: string, deviceRoot?: string): any {
-        if (!deviceRoot && !this.connected) {
-            throw new Error('You must be connected to a device before you can read from it. This error probably means that the target device was not found.');
-        }
-
-        let rawValue: string;
-        const propertyPath = this.constructPropertyPath(property, deviceRoot);
-
-        try {
-            rawValue = fs.readFileSync(propertyPath).toString();
-        } catch (e) {
-            console.error(e);
-            throw new Error('There was an error while reading from the property file ' + propertyPath);
-        }
-
-        rawValue = rawValue.trim();
-        const numValue = Number(rawValue);
-
-        if (isNaN(numValue)) {
-            return rawValue;
-        } else {
-            return numValue;
-        }
-    }
-
-    public setProperty(property: string, value: any): any {
-        if (!this.connected) {
+    /**
+     * Set the raw value from the property (from a STRING)
+     */
+    setProperty(property: string, value: string) {
+        if (!this._connected) {
             throw new Error('You must be connected to a device before you can write to it. This error probably means that the target device was not found.');
         }
 
@@ -138,76 +137,70 @@ export class Device {
 
         try {
             fs.writeFileSync(propertyPath, value.toString());
+
         } catch (e) {
             console.error(e);
             throw new Error('There was an error while writing to the property file ' + propertyPath);
+
         }
     }
 
-    public setNumber(property: string, value: number) {
-        this.setProperty(property, value);
+    /**
+     * Set the value of the property from a number
+     */
+    setPropertyFromNumber(property: string, value: number) {
+        this.setProperty(property, value + '');
     }
 
-    public setString(property: string, value: string) {
-        this.setProperty(property, value);
-    }
-
-    public set(propertyDefs: any) {
+    /**
+     * Set a bunch of properties from a JSON object
+     */
+    setProperties(propertyDefs: any) {
         for (const key in propertyDefs) {
             this.setProperty(key, propertyDefs[key]);
         }
     }
 
-    public registerEventCallback(
-        callbackFunction: (err?: Error, userData?: any) => void,
-        eventPredicate: (userData?: any) => boolean,
-        firstTriggerOnly: boolean = false,
-        userCallbackData?: any) {
-
-        const newEventRequest: EventNotificationRequest = new EventNotificationRequest(
-            (err?) => {
-                callbackFunction(err, userCallbackData);
-            }, eventPredicate, firstTriggerOnly, userCallbackData);
-
-        this.pendingEventRequests.push(newEventRequest);
-        this.updateEventTimerState();
+    /**
+     * Register a callback function to a property change event
+     */
+    registerHandler(handler: EventHandler) {
+        this._handlers.push(handler);
+        this.updateClock();
     }
 
-    public registerEventPromise(eventPredicate: (userData?: any) => boolean, userCallbackData?: any): Promise<any> {
-        if (Promise == null) {
-            throw new Error('Promises are currently unavailable. Install the \'bluebird\' package or use \'registerEventCallback(...)\' instead.');
-        }
-
-        return new Promise((resolve, reject) => {
-            this.registerEventCallback((err?) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(userCallbackData);
-                }
-
-            }, eventPredicate, true, userCallbackData);
-        });
-    }
-
+    /**
+     * Returns the full sysfs path for a given property
+     */
     protected constructPropertyPath(property: string, deviceRoot?: string) {
-        return path.join(deviceRoot || this.deviceRoot, property);
+        return path.join(deviceRoot || this._deviceRoot, property);
     }
 
-    private updatePendingEventRequests() {
-        this.pendingEventRequests = this.pendingEventRequests.filter(
-            (eventRequest, index, arr) =>
-                eventRequest.handleUpdate());
-
-        this.updateEventTimerState();
+    /**
+     * Process the clock tick
+     */
+    protected tick() {
+        this._handlers = this._handlers.filter(handler => handler.update());
+        this.updateClock();
     }
 
-    private updateEventTimerState() {
-        if (this.pendingEventRequests.length > 0 && this.eventTimerCancellationToken == null) {
-            this.eventTimerCancellationToken = setInterval(() => this.updatePendingEventRequests(), Device.eventTimerInterval);
-        } else if (this.pendingEventRequests.length <= 0 && this.eventTimerCancellationToken != null) {
-            clearInterval(this.eventTimerCancellationToken);
-            this.eventTimerCancellationToken = null;
+    /**
+     * Update the state of the event time
+     */
+    protected updateClock() {
+
+        // If anyone is handling events and we have no ticking clock, start one
+        if (this._handlers.length && !this._clock) {
+            this._clock = setInterval(
+                () => this.tick(),
+                this._clockSpeed
+            );
+
+        // If noone is handling events and we have a ticking clock, stop it
+        } else if (!this._handlers.length && this._clock) {
+            clearInterval(this._clock);
+            this._clock = null;
+
         }
     }
 }
