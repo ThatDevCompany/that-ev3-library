@@ -1,7 +1,7 @@
 {
     "name": "that-ev3-library",
     "description": "A library of ev3Dev projects, utilities and tools to be on an EV3Dev based robot",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "license": "MIT",
     "repository": {
         "type": "git",
