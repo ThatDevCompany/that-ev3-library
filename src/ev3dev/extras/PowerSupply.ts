@@ -5,65 +5,53 @@
  * Uses the built-in legoev3-battery if none is specified.
  */
 export class PowerSupply extends Device {
-    public deviceName;
-
-    constructor(deviceName: string) {
+    /**
+     * Constructor
+     */
+    constructor(public deviceName: string) {
         super();
-
-        let deviceConstraints = {};
-        if (deviceName === undefined) {
-            deviceConstraints['scope'] = 'System';
-        } else {
-            this.deviceName = deviceName;
-        }
-
-        this.connect('power_supply', deviceName, deviceConstraints);
+        this.connect('power_supply', deviceName, (!deviceName) ? { scope: 'System' } : {});
     }
 
     /**
-     * The measured current that the battery is supplying (in microamps)
+     * The current that the battery is supplying (in amps)
      */
-    get measuredCurrent(): number {
-        return this.readNumber('current_now');
+    get current(): number {
+        return this.readNumber('current_now') / 1000000;
     }
 
     /**
-     * The measured voltage that the battery is supplying (in microvolts)
+     * The voltage that the battery is supplying (in volts)
      */
-    get measuredVoltage(): number {
-        return this.readNumber('voltage_now');
+    get voltage(): number {
+        return this.readNumber('voltage_now') / 1000000;
     }
 
     /**
+     * The maximum voltage (in volts)
      */
     get maxVoltage(): number {
-        return this.readNumber('voltage_max_design');
+        return this.readNumber('voltage_max_design') / 1000000;
     }
 
     /**
+     * The minimum voltage (in volts)
      */
     get minVoltage(): number {
-        return this.readNumber('voltage_min_design');
+        return this.readNumber('voltage_min_design') / 1000000;
     }
 
     /**
+     * The name of the tech
      */
     get technology(): string {
         return this.readString('technology');
     }
 
     /**
+     * The type of the powersupply
      */
     get type(): string {
         return this.readString('type');
     }
-
-    get voltageVolts(): number {
-        return this.measuredVoltage / 1000000;
-    }
-
-    get currentAmps(): number {
-        return this.measuredCurrent / 1000000;
-    }
-
 }

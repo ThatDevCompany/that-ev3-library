@@ -1,24 +1,27 @@
 import {LED} from './LED';
 
+/**
+ * A coordinated group of LEDs
+ */
 export class LEDGroup {
-    private leds: LED[];
+    /**
+     * PRIVATE
+     * The LEDs in the Group
+     */
+    private _leds: Array<LED>;
 
-    public constructor(...leds: (string | LED)[]) {
-        this.leds = [];
-        for (let ledObj of leds) {
-            if (typeof ledObj === 'string') {
-                let newLed = new LED(<string>ledObj);
-                this.leds.push(newLed);
-            } else {
-                this.leds.push(<LED>ledObj);
-            }
-        }
+    /**
+     * Constructor
+     */
+    constructor(leds: Array<string | LED>) {
+        this._leds = leds.map(led => (led instanceof LED) ? led : new LED(led));
     }
 
-    public get isConnected(): boolean {
-        return this.leds.every(function (led: LED, index: number, wholeArray: LED[]) {
-            return led.connected;
-        });
+    /**
+     * Are the LEDs in the LED Group all connected
+     */
+    get isConnected(): boolean {
+        return this._leds.every(led => led.connected);
     }
 
     /**
@@ -28,19 +31,15 @@ export class LEDGroup {
      * @param colorCombination The percent powers to use for each LED, applied to the corresponding index in the LED group.
      * @param pctPower The scale factor to multiply each value by. Leave undefined or null to default to `1`.
      */
-    public setColor(colorCombination: number[], pctPower: number) {
-        if (colorCombination.length !== this.leds.length) {
+    setColor(colorCombination: number[], pctPower: number) {
+        if (colorCombination.length !== this._leds.length) {
             throw new Error('The given color values had either too few or too many numbers for this LED group.'
-                + ' Expected length: ' + this.leds.length + '; Given length: ' + colorCombination.length);
+                + ' Expected length: ' + this._leds.length + '; Given length: ' + colorCombination.length);
         }
 
-        if (pctPower === undefined || pctPower == null) {
-            pctPower = 1;
-        }
-
-        for (let ledIndex = 0; ledIndex < this.leds.length; ledIndex++) {
-            this.leds[ledIndex].brightnessPct = pctPower * colorCombination[ledIndex];
-        }
+        this._leds.forEach((led, idx) => {
+            led.brightness = pctPower * colorCombination[idx];
+        });
     }
 
     /**
@@ -50,25 +49,27 @@ export class LEDGroup {
      *
      * @param props A hash containing the key-value pairs of properties to set.
      */
-    public setProps(props: { [propName: string]: any }) {
-        for (let led of this.leds) {
+    setProps(props: { [propName: string]: any }) {
+        this._leds.forEach(led => {
             for (let prop in Object.keys(props)) {
-                if (Object.keys(led).indexOf(prop) !== -1) {
+                if (led.hasOwnProperty(prop)) {
                     led[prop] = props[prop];
                 }
             }
-        }
+        });
     }
 
-    public allOn() {
-        for (let led of this.leds) {
-            led.on();
-        }
+    /**
+     * Turn on all LEDs in the group
+     */
+    allOn(brightness: number = 1) {
+        this._leds.forEach(led => led.on(brightness));
     }
 
-    public allOff() {
-        for (let led of this.leds) {
-            led.off();
-        }
+    /**
+     * Turn off all LEDs in the group
+     */
+    allOff() {
+        this._leds.forEach(led => led.off());
     }
 }

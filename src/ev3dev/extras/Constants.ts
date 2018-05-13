@@ -1,4 +1,4 @@
-export enum INPUT {
+export enum Input {
     AUTO = '',
     S1 = 'in1',
     S2 = 'in2',
@@ -6,13 +6,14 @@ export enum INPUT {
     S4 = 'in4'
 }
 
-export enum OUTPUT {
+export enum Output {
     AUTO = '',
     MA = 'outA',
     MB = 'outB',
     MC = 'outC',
     MD = 'outD'
 }
+
 export enum Polarity {
     NORMAL = 'normal',
     INVERSED = 'inversed'

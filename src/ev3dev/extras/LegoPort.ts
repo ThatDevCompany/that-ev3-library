@@ -28,9 +28,11 @@
  * a specific port.
  */
 export class LegoPort extends Device {
+    /**
+     * Construct
+     */
     constructor(port: string) {
         super();
-
         this.connect('lego-port', 'port(\d*)', {
             port_name: port
         });
