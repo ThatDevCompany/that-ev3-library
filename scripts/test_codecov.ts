@@ -2,6 +2,7 @@ import {BuildUtils} from 'that-build-library';
 
 BuildUtils
 	.exec('TESTING', 'nyc', [
+		'--all',
 		'--reporter', 'lcov',
 		'--report-dir', './coverage',
 		'--temp-directory', './coverage/tmp',
