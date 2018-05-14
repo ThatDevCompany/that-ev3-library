@@ -12,6 +12,8 @@ BuildUtils
 		'src/**/*.spec.js'
 	])
 	.flatMap(() => BuildUtils
-		.exec('SENDING TO CODECOV', 'codecov', [])
+		.exec('SENDING TO CODECOV', 'codecov', [
+			'--disable=gcov'
+		])
 	)
 	.subscribe();
