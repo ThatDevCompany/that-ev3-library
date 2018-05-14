@@ -37,4 +37,4 @@ jobs:
       - run: npm run build:scripts
 
       # run tests!
-      - run: npm test
+      - run: npm run test:codecov
