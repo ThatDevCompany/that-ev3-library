@@ -2,13 +2,14 @@
 	"compileOnSave": true,
 	"compilerOptions": {
 		"rootDir": "./",
-		"target": "es5",
+		"target": "es6",
+		"module": "commonjs",
 		"inlineSourceMap": true,
 		"inlineSources": true,
 		"moduleResolution": "node",
+		"experimentalDecorators": true,
 		"types": [
 			"jasmine",
-			"jasminewd2",
 			"node"
 		],
 		"typeRoots": [

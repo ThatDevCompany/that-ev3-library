@@ -1,7 +1,7 @@
 {
     "name": "that-ev3-library",
     "description": "A library of ev3Dev projects, utilities and tools to be on an EV3Dev based robot",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -15,21 +15,21 @@
         "build:scripts": "tsc -p scripts/tsconfig.json",
         "build:tests": "tsc -p src/tsconfig.json",
         "build": "node scripts/build.js",
-        "test:codecov": "npm run build:tests && node scripts/test_codecov.js",
+        "test:cover": "npm run build:tests && node scripts/test_cover.js",
         "test": "npm run build:tests && node scripts/test.js",
         "publish": "node scripts/publish.js"
     },
-    "dependencies": {},
+    "dependencies": {
+        "rxjs": "^6.1.0",
+        "rxjs-compat": "^6.1.0"
+    },
     "devDependencies": {
         "@types/jasmine": "~2.8.3",
-        "@types/jasminewd2": "~2.0.2",
-        "@types/node": "~6.0.60",
+        "@types/node": "^10.0.9",
         "codecov": "^3.0.2",
         "jasmine": "^3.1.0",
-        "jasmine-core": "~2.8.0",
-        "jasmine-spec-reporter": "~4.2.1",
         "nyc": "^11.7.3",
-        "that-build-library": "^0.0.4",
+        "that-dev-library": "^0.1.4",
         "tslint": "^5.10.0",
         "typescript": "^2.8.3"
     }

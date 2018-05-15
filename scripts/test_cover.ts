@@ -1,9 +1,9 @@
 import {BuildUtils} from 'that-dev-library';
+import 'rxjs/add/operator/mergeMap';
 
 BuildUtils
 	.exec('TESTING', 'nyc', [
-		'--reporter', 'html',
-		'--reporter', 'text',
+		'--reporter', 'lcov',
 		'--all', 'true',
 		'--report-dir', './coverage',
 		'--temp-directory', './coverage/tmp',
@@ -13,4 +13,7 @@ BuildUtils
 		'src/*.spec.js',
 		'src/**/*.spec.js'
 	])
+	.mergeMap(() => BuildUtils
+		.exec('SENDING TO CODECOV', 'codecov', [])
+	)
 	.subscribe();
