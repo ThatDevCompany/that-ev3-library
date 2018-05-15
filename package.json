@@ -1,7 +1,7 @@
 {
     "name": "that-ev3-library",
     "description": "A library of ev3Dev projects, utilities and tools to be on an EV3Dev based robot",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -15,9 +15,9 @@
         "build:scripts": "tsc -p scripts/tsconfig.json",
         "build:tests": "tsc -p src/tsconfig.json",
         "build": "node scripts/build.js",
-	    "test": "npm run build:tests && node scripts/test.js",
-	    "cover": "node scripts/cover.js",
-	    "publish": "node scripts/publish.js"
+        "test": "npm run build:tests && node scripts/test.js",
+        "cover": "node scripts/cover.js",
+        "publish": "node scripts/publish.js"
     },
     "dependencies": {},
     "devDependencies": {
@@ -26,7 +26,7 @@
         "codecov": "^3.0.2",
         "jasmine": "^3.1.0",
         "nyc": "^11.7.3",
-        "that-dev-library": "^0.1.4",
+        "that-dev-library": "^0.1.6",
         "tslint": "^5.10.0",
         "typescript": "^2.8.3"
     }
