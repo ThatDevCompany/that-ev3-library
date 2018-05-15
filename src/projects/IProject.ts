@@ -11,3 +11,11 @@ export interface IProject {
 	run(): void;
 
 }
+
+/**
+ * A abstract implementation of the IProject interface
+ */
+export abstract class AbstractProject implements IProject {
+	name: string;
+	run() {}
+}

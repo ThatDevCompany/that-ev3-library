@@ -15,14 +15,11 @@
         "build:scripts": "tsc -p scripts/tsconfig.json",
         "build:tests": "tsc -p src/tsconfig.json",
         "build": "node scripts/build.js",
-        "test:cover": "npm run build:tests && node scripts/test_cover.js",
-        "test": "npm run build:tests && node scripts/test.js",
-        "publish": "node scripts/publish.js"
+	    "test": "npm run build:tests && node scripts/test.js",
+	    "cover": "node scripts/cover.js",
+	    "publish": "node scripts/publish.js"
     },
-    "dependencies": {
-        "rxjs": "^6.1.0",
-        "rxjs-compat": "^6.1.0"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@types/jasmine": "~2.8.3",
         "@types/node": "^10.0.9",
