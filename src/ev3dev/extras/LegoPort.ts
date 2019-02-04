@@ -1,4 +1,4 @@
-﻿import {Device} from '../io';
+﻿import { Device } from '../io'
 
 /**
  * The `lego-port` class provides an interface for working with input and
@@ -28,83 +28,83 @@
  * a specific port.
  */
 export class LegoPort extends Device {
-    /**
-     * Construct
-     */
-    constructor(port: string) {
-        super();
-        this.connect('lego-port', 'port(\d*)', {
-            port_name: port
-        });
-    }
+	/**
+	 * Construct
+	 */
+	constructor(port: string) {
+		super()
+		this.connect('lego-port', 'port(d*)', {
+			port_name: port
+		})
+	}
 
-    protected _deviceIndex: number = -1;
+	protected _deviceIndex: number = -1
 
-    get deviceIndex(): number {
-        return this._deviceIndex;
-    }
+	get deviceIndex(): number {
+		return this._deviceIndex
+	}
 
-    /**
-     * Returns the name of the port. See individual driver documentation for
-     * the name that will be returned.
-     */
-    get address(): string {
-        return this.readProperty('address');
-    }
+	/**
+	 * Returns the name of the port. See individual driver documentation for
+	 * the name that will be returned.
+	 */
+	get address(): string {
+		return this.readProperty('address')
+	}
 
-    /**
-     * Returns the name of the driver that loaded this device. You can find the
-     * complete list of drivers in the [list of port drivers].
-     */
-    get driverName(): string {
-        return this.readProperty('driver_name');
-    }
+	/**
+	 * Returns the name of the driver that loaded this device. You can find the
+	 * complete list of drivers in the [list of port drivers].
+	 */
+	get driverName(): string {
+		return this.readProperty('driver_name')
+	}
 
-    /**
-     * Returns a list of the available modes of the port.
-     */
-    get modes(): string[] {
-        return this.readPropertyAsArray('modes');
-    }
+	/**
+	 * Returns a list of the available modes of the port.
+	 */
+	get modes(): string[] {
+		return this.readPropertyAsArray('modes')
+	}
 
-    /**
-     * Reading returns the currently selected mode. Writing sets the mode.
-     * Generally speaking when the mode changes any sensor or motor devices
-     * associated with the port will be removed new ones loaded, however this
-     * this will depend on the individual driver implementing this class.
-     */
-    get mode(): string {
-        return this.readProperty('mode');
-    }
+	/**
+	 * Reading returns the currently selected mode. Writing sets the mode.
+	 * Generally speaking when the mode changes any sensor or motor devices
+	 * associated with the port will be removed new ones loaded, however this
+	 * this will depend on the individual driver implementing this class.
+	 */
+	get mode(): string {
+		return this.readProperty('mode')
+	}
 
-    /**
-     * Reading returns the currently selected mode. Writing sets the mode.
-     * Generally speaking when the mode changes any sensor or motor devices
-     * associated with the port will be removed new ones loaded, however this
-     * this will depend on the individual driver implementing this class.
-     */
-    set mode(value: string) {
-        this.setProperty('mode', value);
-    }
+	/**
+	 * Reading returns the currently selected mode. Writing sets the mode.
+	 * Generally speaking when the mode changes any sensor or motor devices
+	 * associated with the port will be removed new ones loaded, however this
+	 * this will depend on the individual driver implementing this class.
+	 */
+	set mode(value: string) {
+		this.setProperty('mode', value)
+	}
 
-    /**
-     * For modes that support it, writing the name of a driver will cause a new
-     * device to be registered for that driver and attached to this port. For
-     * example, since NXT/Analog sensors cannot be auto-detected, you must use
-     * this attribute to load the correct driver. Returns -EOPNOTSUPP if setting a
-     * device is not supported.
-     */
-    set setDevice(value: string) {
-        this.setProperty('set_device', value);
-    }
+	/**
+	 * For modes that support it, writing the name of a driver will cause a new
+	 * device to be registered for that driver and attached to this port. For
+	 * example, since NXT/Analog sensors cannot be auto-detected, you must use
+	 * this attribute to load the correct driver. Returns -EOPNOTSUPP if setting a
+	 * device is not supported.
+	 */
+	set setDevice(value: string) {
+		this.setProperty('set_device', value)
+	}
 
-    /**
-     * In most cases, reading status will return the same value as `mode`. In
-     * cases where there is an `auto` mode additional values may be returned,
-     * such as `no-device` or `error`. See individual port driver documentation
-     * for the full list of possible values.
-     */
-    get status(): string {
-        return this.readProperty('status');
-    }
+	/**
+	 * In most cases, reading status will return the same value as `mode`. In
+	 * cases where there is an `auto` mode additional values may be returned,
+	 * such as `no-device` or `error`. See individual port driver documentation
+	 * for the full list of possible values.
+	 */
+	get status(): string {
+		return this.readProperty('status')
+	}
 }

@@ -1,9 +1,7 @@
-import {ServoMotor} from './ServoMotor';
+import { ServoMotor } from './ServoMotor'
 
 describe('ServoMotor', () => {
-
-    it('should be instantiable', () => {
-        expect(new ServoMotor('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new ServoMotor('test')).toBeDefined()
+	})
+})

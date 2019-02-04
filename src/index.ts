@@ -1,2 +1,2 @@
-export * from './Robot';
-export * from './projects';
+export * from './Robot'
+export * from './projects'

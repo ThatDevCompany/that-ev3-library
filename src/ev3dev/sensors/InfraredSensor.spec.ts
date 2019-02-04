@@ -1,9 +1,7 @@
-import {InfraredSensor} from './InfraredSensor';
+import { InfraredSensor } from './InfraredSensor'
 
 describe('InfraredSensor', () => {
-
-    it('should be instantiable', () => {
-        expect(new InfraredSensor('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new InfraredSensor('test')).toBeDefined()
+	})
+})

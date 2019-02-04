@@ -1,9 +1,7 @@
-import {GyroSensor} from './GyroSensor';
+import { GyroSensor } from './GyroSensor'
 
 describe('GyroSensor', () => {
-
-    it('should be instantiable', () => {
-        expect(new GyroSensor('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new GyroSensor('test')).toBeDefined()
+	})
+})

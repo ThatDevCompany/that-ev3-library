@@ -1,13 +1,11 @@
-import {BatteryProject} from './BatteryProject';
+import { BatteryProject } from './BatteryProject'
 
 describe('BatteryProject', () => {
-
-    it('should be an object', () => {
-        expect(typeof BatteryProject).toEqual('object');
-    });
+	it('should be an object', () => {
+		expect(typeof BatteryProject).toEqual('object')
+	})
 
 	it('should contain a name', () => {
-		expect(BatteryProject.hasOwnProperty('name')).toBeTruthy();
-	});
-
-});
+		expect(BatteryProject.hasOwnProperty('name')).toBeTruthy()
+	})
+})

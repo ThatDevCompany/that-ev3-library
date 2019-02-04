@@ -1,9 +1,7 @@
-import {LEDGroup} from './LEDGroup';
+import { LEDGroup } from './LEDGroup'
 
 describe('LEDGroup', () => {
-
-    it('should be instantiable', () => {
-        expect(new LEDGroup()).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new LEDGroup()).toBeDefined()
+	})
+})

@@ -1,9 +1,7 @@
-import {LED} from './LED';
+import { LED } from './LED'
 
 describe('LED', () => {
-
-    it('should be instantiable', () => {
-        expect(new LED('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new LED('test')).toBeDefined()
+	})
+})

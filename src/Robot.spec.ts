@@ -1,16 +1,14 @@
-import {Robot} from './Robot';
+import { Robot } from './Robot'
 
 describe('Robot', () => {
-
 	it('should be instantiable', () => {
-		const robot = new Robot();
-		expect(robot).toBeDefined();
-	});
+		const robot = new Robot()
+		expect(robot).toBeDefined()
+	})
 
 	it('should fail without error if no project provided', () => {
-		const robot = new Robot();
-		robot.run();
-		expect(true).toBeTruthy();
-	});
-
-});
+		const robot = new Robot()
+		robot.run()
+		expect(true).toBeTruthy()
+	})
+})

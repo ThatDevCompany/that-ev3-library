@@ -1,9 +1,7 @@
-import {DcMotor} from './DcMotor';
+import { DcMotor } from './DcMotor'
 
 describe('DcMotor', () => {
-
-    it('should be instantiable', () => {
-        expect(new DcMotor('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new DcMotor('test')).toBeDefined()
+	})
+})

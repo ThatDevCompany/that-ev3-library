@@ -1,9 +1,7 @@
-import {Device} from './Device';
+import { Device } from './Device'
 
 describe('Device', () => {
-
-    it('should be instantiable', () => {
-        expect(new Device()).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new Device()).toBeDefined()
+	})
+})

@@ -1,9 +1,7 @@
-import {TouchSensor} from './TouchSensor';
+import { TouchSensor } from './TouchSensor'
 
 describe('TouchSensor', () => {
-
-    it('should be instantiable', () => {
-        expect(new TouchSensor('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new TouchSensor('test')).toBeDefined()
+	})
+})

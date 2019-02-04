@@ -1,9 +1,7 @@
-import {SoundSensor} from './SoundSensor';
+import { SoundSensor } from './SoundSensor'
 
 describe('SoundSensor', () => {
-
-    it('should be instantiable', () => {
-        expect(new SoundSensor('test')).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new SoundSensor('test')).toBeDefined()
+	})
+})

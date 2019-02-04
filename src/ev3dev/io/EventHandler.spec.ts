@@ -1,12 +1,7 @@
-import {EventHandler} from './EventHandler';
+import { EventHandler } from './EventHandler'
 
 describe('EventHandler', () => {
-
-    it('should be instantiable', () => {
-        expect(new EventHandler(
-            () => {},
-            (): boolean => false
-        )).toBeDefined();
-    });
-
-});
+	it('should be instantiable', () => {
+		expect(new EventHandler(() => {}, (): boolean => false)).toBeDefined()
+	})
+})
